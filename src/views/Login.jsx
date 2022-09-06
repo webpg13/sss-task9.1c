@@ -56,6 +56,11 @@ const Login = (props) => {
     }
     querySnapshot.forEach((doc) => {
       console.log(doc.id, " => ", doc.data());
+      let userInfo = {
+        name: doc.data().name,
+        email: doc.data().email
+      }
+      sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
       let result = bcrypt.compareSync(password, doc.data().password);
       console.log("result: ", result);
       if (email == doc.data().email && result) {
